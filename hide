@@ -1,0 +1,16 @@
+#!/bin/bash
+
+for i in $@; do
+	if [ -n "$( echo $i | egrep "^\." )" ];
+	then
+		# Starts with a '.'
+		# Remove the '.'
+		name=$i
+		name=${name:1}
+	else
+		# Not hidden.
+		name=".$i"
+	fi
+
+	mv $i $name
+done

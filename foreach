@@ -4,7 +4,8 @@
 
 if [ -n "$( echo $1 | egrep "\-[0-9]" )" ]; then
 	# Level supplied.
-	l=${1[1]}
+	l=$1
+	l=${l:1}
 	command=$2
 else
 	# Level not supplied. Assumes 1.
@@ -26,7 +27,7 @@ for i in */; do
 	if [ $l -gt 0 ]; then
 		# Repeat the foreach command.
 		echo "Wrong floor. Going down one."
-		../$0 -$l "$command" || ( cd ..; exit )
+		$0 -$l "$command" || ( cd ..; exit )
 	else
 		# We're on the right level. Run the command.
 		echo "$command" | bash || ( cd ..; exit )
