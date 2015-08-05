@@ -26,11 +26,11 @@ for i in */; do
 	# If we're still not on level 0
 	if [ $l -gt 0 ]; then
 		# Repeat the foreach command.
-		echo "Wrong floor. Going down one."
-		$0 -$l "$command" || ( cd ..; exit )
+		echo "Going down one level:"
+		( $0 -$l "$command" | sed "s/^\(.\)/     \1/" ) || ( code=$?; cd ..; exit $code)
 	else
 		# We're on the right level. Run the command.
-		echo "$command" | bash || ( cd ..; exit )
+		( echo "$command" | bash | sed "s/^\(.\)/     \1/" ) || ( code=$?; cd ..; exit $code)
 	fi
 	cd ..
 done
