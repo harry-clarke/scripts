@@ -2,7 +2,7 @@
 
 # Iterates through the directories in your cwd, applying the given command.
 
-if [ -n "$( echo $1 | egrep "\-[0-9]" )" ]; then
+if [ -n "$( echo $1 | egrep "^\-[0-9]$" )" ]; then
 	# Level supplied.
 	l=$1
 	l=${l:1}
