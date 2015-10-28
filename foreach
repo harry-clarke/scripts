@@ -30,7 +30,7 @@ for i in */; do
 		( $0 -$l "$command" | sed "s/^\(.\)/     \1/" ) || ( code=$?; cd ..; exit $code)
 	else
 		# We're on the right level. Run the command.
-		( $command 2>&1 | sed "s/^\(.\)/     \1/" ) || ( code=$?; cd ..; exit $code)
+		( echo "$command" | bash 2>&1 | sed "s/^\(.\)/     \1/" ) || ( code=$?; cd ..; exit $code)
 	fi
 	cd ..
 done
