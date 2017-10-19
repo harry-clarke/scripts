@@ -3,21 +3,17 @@
 from subprocess import call
 import sys, os
 
-try:
-	if len(sys.argv) < 2:
-		raise Exception('No Alias Supplied')
-	path = "~/.bashrc"
-	path = os.path.expanduser(path)
-	alias = sys.argv[1]
-	for arg in sys.argv[2:]:
-		if arg == '=':
-			alias = alias + arg
-		else:
-			alias = alias + " " + arg
-	f = open(path,'a')
-	f.write(os.linesep + "alias '" + alias + '\'')
-	call(["source","~/.bashrc"])
-	#print("alias'" + alias + '\'')
-except Exception as e:
-	print("Failed:")
-	print(e)
+PATH = "~/.bashrc"
+
+if len(sys.argv) < 2:
+	raise Exception('No Alias Supplied')
+path = os.path.expanduser(PATH)
+alias = sys.argv[1]
+for arg in sys.argv[2:]:
+	if arg == '=':
+		alias = alias + arg
+	else:
+		alias = alias + " " + arg
+f = open(path,'a')
+f.write(os.linesep + "alias '" + alias + '\'')
+call(["source",path])
